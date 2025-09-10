@@ -1,0 +1,266 @@
+/* ===== Βασικά ===== */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  background: #111;
+  color: #f5f5f5;
+  padding-top: 0; /* δεν αφήνουμε μαύρη λωρίδα πάνω */
+}
+
+/* ===== Ενιαία μπάρα (logo + μενού) ===== */
+.top-bar {
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  height: auto;
+  overflow: visible;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.site-logo-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: transparent !important;
+}
+
+.site-logo {
+  height: 130px;
+  width: auto;
+  display: block;
+}
+
+/* ===== Navigation (fixed, center) ===== */
+.main-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1100;
+
+  background: #b40000;
+  height: 60px;                /* σταθερό ύψος μενού */
+  padding: 0 16px;             /* οριζόντιο padding μόνο */
+
+  border: none !important;     /* καμία γραμμή */
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.main-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1em;
+  line-height: 30px;           /* κάθετη κεντραρισμένη στο ύψος του μενού */
+  transition: color 0.2s ease;
+}
+
+.main-nav a + a { margin-left: 12px; }
+
+.main-nav a:hover { color: #ffe6e6; }
+
+/* ===== Επικεφαλίδες / τίτλοι ===== */
+.site-title-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  background: #fc0303;
+  text-align: center;
+
+  /* ο τίτλος/λογότυπο ξεκινά μετά το fixed μενού */
+  margin-top: 60px;            /* ίδιο με το height του .main-nav */
+  padding: 20px 0 12px;
+}
+
+.site-title-header h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.6em;
+  margin: 0;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.site-title-header p {
+  margin: 10px 0 0;
+  font-size: 1.1em;
+  font-style: italic;
+  color: #ffe6e6;
+}
+
+.slogan {
+  background: transparent;
+  color: #fff;
+  text-align: center;
+  padding: 4px;
+  font-size: 1.2em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* ===== Layout ===== */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+.intro { text-align: center; margin-bottom: 40px; }
+.intro h2 { color: #fff; }
+
+/* ===== Προϊόντα ===== */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.product {
+  background: #1a0d0d;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid #b40000;
+  box-shadow: 0 6px 16px rgba(0,0,0,.4);
+  transition: transform .25s ease, box-shadow .25s ease;
+  text-align: center;
+}
+
+.product:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.6);
+}
+
+.product img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 2px solid #b40000;
+}
+
+.product h3 {
+  margin: 14px 0 6px;
+  color: #ff2e2e;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.product p {
+  font-size: 0.95em;
+  color: #f2f2f2;
+  margin: 0 14px 12px;
+}
+
+.price {
+  display: inline-block;
+  background: #ff2e2e;
+  color: #fff;
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  font-size: 1.05em;
+  box-shadow: 0 4px 10px rgba(255,46,46,.4);
+}
+
+/* ===== Slider ===== */
+.text-slider { text-align: center; margin: 40px 0; }
+.slide-text { font-size: 1.2em; opacity: 0; }
+.fade-in { animation: fadeIn 0.5s forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* ===== About Button ===== */
+.nav { position: fixed; top: 20px; right: 20px; }
+.btn-about {
+  background: #fff; color: #b40000;
+  padding: 10px 18px; border-radius: 6px;
+  text-decoration: none; font-weight: bold; transition: .2s;
+}
+.btn-about:hover { background: #ff2e2e; color: #fff; }
+
+/* ===== Footer ===== */
+footer {
+  background: #000; color: #fff; text-align: center;
+  padding: 20px; margin-top: 40px;
+}
+footer p { margin: 5px 0; }
+footer a { color: #fff; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* ===== Map Section ===== */
+.section-title {
+  text-align: center; color: #ff2e2e;
+  margin: 0 0 16px 0;
+  font-size: clamp(22px, 2.2vw, 28px);
+  letter-spacing: .2px;
+}
+
+.map-card {
+  position: relative; max-width: 1100px; margin: 0 auto;
+  border-radius: 18px; overflow: hidden;
+  background: #0b0f17;
+  box-shadow: 0 18px 45px rgba(0,0,0,.28);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.map-wrapper {
+  position: relative; width: 100%;
+  aspect-ratio: 16/9; overflow: hidden;
+  filter: saturate(.95) contrast(1.02);
+}
+
+.map-iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  border: 0; transition: transform .5s ease, filter .5s ease;
+}
+.map-wrapper:hover .map-iframe {
+  transform: scale(1.005); filter: saturate(1.05);
+}
+
+.map-overlay {
+  position: absolute; right: 18px; bottom: 18px;
+  display: grid; gap: 6px; min-width: min(360px, 90%);
+  padding: 14px 16px; border-radius: 14px;
+  backdrop-filter: blur(10px);
+  background: rgba(12, 18, 28, .52); color: #eaf0ff;
+  border: 1px solid rgba(255,255,255,.24);
+}
+.map-overlay__title { font-weight: 700; font-size: 18px; margin-bottom: 2px; }
+.map-overlay__line { font-size: 14px; opacity: .95; }
+.map-actions { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+
+.btn {
+  appearance: none; border: 0;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 14px; text-decoration: none; cursor: pointer;
+  background: #ff2e2e; color: white;
+  box-shadow: 0 6px 16px rgba(255,46,46,.35);
+  transition: transform .15s ease, box-shadow .2s ease, opacity .2s ease;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(255,46,46,.35); }
+.btn:active { transform: translateY(0); opacity: .9; }
+.btn--ghost { background: transparent; color: inherit; border: 1px solid currentColor; box-shadow: none; }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .top-bar { flex-direction: column; gap: 10px; }
+  .main-nav { height: 56px; }          /* λίγο χαμηλότερο στη mobile */
+  .main-nav a { line-height: 56px; font-size: 1em; }
+  .site-title-header { margin-top: 56px; }
+}
+
+@media (max-width: 640px) {
+  .map-overlay { left: 12px; right: 12px; bottom: 12px; }
+}

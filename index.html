@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Φάρμα Παναγιώτη - Φρέσκα κρέατα, ποιότητα, παράδοση και γεύση στον Βόλο.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Φάρμα Παναγιώτη</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <!-- Ενιαία μπάρα με μενού -->
+    <div class="top-bar">
+      <nav class="main-nav" aria-label="Κύρια πλοήγηση">
+        <a href="offers.html" target="_blank">Προσφορές</a>
+        <a href="#products">Προϊόντα</a>
+        <a href="#about">Σχετικά με εμάς</a>
+      </nav>
+    </div>
+
+    <!-- Τίτλος -->
+    <div class="site-title-header">
+      <img src="images/logo.png" alt="Λογότυπο Φάρμα Παναγιώτη" class="site-logo">
+      <h1>Φάρμα Παναγιώτη</h1>
+      <p>Ποιότητα – Παράδοση – Γεύση</p>
+    </div>
+
+    <!-- Slogan -->
+    <div class="slogan">❤️ Love to meat you ❤️</div>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <h2>Καλώς ήρθατε</h2>
+      <p>Στο κρεοπωλείο <b>Η Γεύση</b> θα βρείτε φρέσκα κρέατα, μοναδικής ποιότητας και γεύσης. 
+      Μεράκι, γνώση και αγάπη για το καλό φαγητό – γιατί <b>Love to meat you!</b></p>
+    </section>
+
+    <!-- Slider -->
+    <section id="text-slider" class="text-slider"></section>
+
+    <!-- Προϊόντα -->
+    <section id="products">
+      <h2 class="section-title red">Τα προϊόντα μας</h2>
+      <div id="products-container"></div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <h2 class="section-title red">About Us</h2>
+      <div id="about-container"></div>
+    </section>
+
+    <!-- Map -->
+    <section class="map-section">
+      <h2 class="section-title">Πού θα μας βρείτε</h2>
+
+      <div class="map-card">
+        <div class="map-wrapper">
+          <iframe
+            class="map-iframe"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29239.32858273712!2d22.395203914171557!3d39.618065421597116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1358892dde0bb195%3A0x8b10ef793e0be4ee!2zzqbOrM-BzrzOsSDOoM6xzr3Osc6zzrnPic-Ezq4!5e0!3m2!1sel!2sgr!4v1757499061647!5m2!1sel!2sgr"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <div class="map-overlay">
+          <div class="map-overlay__title">Φάρμα Παναγιώτη</div>
+          <div class="map-overlay__line">📍 Οδός Παράδοσης 15, Βόλος</div>
+          <div class="map-overlay__line">📞 <a href="tel:2421012345">24210 12345</a></div>
+          <div class="map-actions">
+            <a class="btn" target="_blank"
+               href="https://www.google.com/maps/dir/?api=1&destination=Οδός+Παράδοσης+15,+Βόλος">Οδηγίες</a>
+            <a class="btn btn--ghost" target="_blank"
+               href="https://maps.google.com/?q=Οδός+Παράδοσης+15,+Βόλος">Άνοιγμα στο Maps</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>📍 Ερυθρού Σταυρού & Πετρομπέη 2 , Λάρισσα</p>
+    <p>📞 <a href="tel:2410283938">2410283938</a></p>
+    <p>🕒 Καθημερινά 08:00 – 20:00</p>
+  </footer>
+
+  <script>
+    // Slider
+    const sliderContainer = document.getElementById("text-slider");
+    sliderContainer.innerHTML = '<div class="slide-text"></div>';
+
+    const texts = [
+      "Φρέσκα κρέατα καθημερινά, απευθείας από τον παραγωγό.",
+      "Επιλέγουμε μόνο την καλύτερη ποιότητα για εσάς.",
+      "Μεράκι και αγάπη για κάθε κομμάτι κρέατος.",
+      "Η παράδοση συναντά τη γεύση – Love to meat you!"
+    ];
+
+    let index = 0;
+    const slideElement = sliderContainer.querySelector(".slide-text");
+
+    function showSlide() {
+      slideElement.classList.remove("fade-in");
+      void slideElement.offsetWidth; // restart animation
+      slideElement.textContent = texts[index];
+      slideElement.classList.add("fade-in");
+      index = (index + 1) % texts.length;
+    }
+
+    showSlide();
+    setInterval(showSlide, 3000);
+
+    // Φόρτωση προϊόντων
+    fetch("products.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("products-container").innerHTML = data;
+      });
+
+    // Φόρτωση "Σχετικά με εμάς"
+    fetch("about.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("about-container").innerHTML = data;
+      });
+  </script>
+</body>
+</html>
