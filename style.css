@@ -17,7 +17,7 @@ body {
   height: auto;
   overflow: visible;
   border: none !important;
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 .site-logo-header {
@@ -45,27 +45,49 @@ body {
   top: 0; left: 0; right: 0;
   z-index: 1100;
 
-  background: #491717;
-  height: 60px;                /* σταθερό ύψος μενού */
-  padding: 0 16px;             /* οριζόντιο padding μόνο */
+  background: linear-gradient(90deg, #491717, #6e1e1e);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  animation: navGradient 6s ease infinite;
 
-  border: none !important;     /* καμία γραμμή */
+  height: 60px;
+  padding: 0 16px;
+  border: none !important;
   border-bottom: none !important;
   box-shadow: none !important;
 }
 
+
 .main-nav a {
+  position: relative;
   color: #fff;
   text-decoration: none;
   font-weight: bold;
   font-size: 1.1em;
-  line-height: 30px;           /* κάθετη κεντραρισμένη στο ύψος του μενού */
-  transition: color 0.2s ease;
+  line-height: 30px;
+  transition: color 0.3s ease;
 }
 
-.main-nav a + a { margin-left: 12px; }
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: #ff2e2e;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
 
-.main-nav a:hover { color: #ffe6e6; }
+.main-nav a:hover {
+  color: #ffe6e6;
+}
+
+.main-nav a:hover::after {
+  transform: scaleX(1);
+}
+
 
 /* ===== Επικεφαλίδες / τίτλοι ===== */
 .site-title-header {
@@ -116,8 +138,16 @@ body {
   padding: 20px;
 }
 
-.intro { text-align: center; margin-bottom: 40px; }
-.intro h2 { color: #fff; }
+.intro h2 {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 
 /* ===== Προϊόντα ===== */
 .products {
@@ -177,9 +207,15 @@ body {
 
 /* ===== Slider ===== */
 .text-slider { text-align: center; margin: 40px 0; }
-.slide-text { font-size: 1.2em; opacity: 0; }
-.fade-in { animation: fadeIn 0.5s forwards; }
-@keyframes fadeIn { to { opacity: 1; } }
+.slide-text {
+  font-size: 1.2em;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.fade-in {
+  opacity: 1;
+}
+
 
 /* ===== About Button ===== */
 .nav { position: fixed; top: 20px; right: 20px; }
@@ -253,6 +289,12 @@ footer a:hover { text-decoration: underline; }
 .btn:active { transform: translateY(0); opacity: .9; }
 .btn--ghost { background: transparent; color: inherit; border: 1px solid currentColor; box-shadow: none; }
 
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(255,46,46,.4);
+}
+
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .top-bar { flex-direction: column; gap: 10px; }
@@ -261,6 +303,142 @@ footer a:hover { text-decoration: underline; }
   .site-title-header { margin-top: 56px; }
 }
 
+@media (max-width: 480px) {
+  .site-title-header h1 {
+    font-size: 1.8em;
+  }
+  .product h3 {
+    font-size: 1.1em;
+  }
+  .price {
+    font-size: 0.95em;
+  }
+}
+
+
 @media (max-width: 640px) {
   .map-overlay { left: 12px; right: 12px; bottom: 12px; }
 }
+
+/* προσφωρές popup */
+.popup {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background: #fff;
+  color: #491717;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  position: relative;
+}
+
+.popup-content h2 {
+  margin-top: 0;
+  font-size: 1.6em;
+}
+
+.popup-content p {
+  font-size: 1em;
+  margin: 12px 0 20px;
+}
+
+.popup .btn {
+  background: #ff2e2e;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px; right: 14px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #491717;
+}
+
+.hidden {
+  display: none;
+}
+
+.offers-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  background: linear-gradient(to bottom right, #792828, #111111);
+  color: #fff7f7;
+  box-shadow: -6px 0 20px rgba(0, 0, 0, 0.25);
+  z-index: 9998;
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+  border-left: 4px solid #5e0d0d;
+}
+
+.offers-panel.show {
+  transform: translateX(0);
+}
+
+.offers-content {
+  padding: 24px;
+  overflow-y: auto;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.offers-content h2 {
+  font-size: 1.8em;
+  margin-bottom: 12px;
+  color: #000000;
+}
+
+.offers-content p {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #f3ecec;
+}
+
+#offers-container .product {
+  background: #fff8f8;
+  border: 1px solid #ffcccc;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+#offers-container .product:hover {
+  transform: scale(1.02);
+}
+
+.close-offers {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #ffffff;
+  background: none;
+  border: none;
+}
+
+@keyframes navGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
